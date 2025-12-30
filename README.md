@@ -1,13 +1,3 @@
 # Signalium Debug
 
-Edit: This branch illustrates that the same bugs do not when Signalium is replaced with Jotai.
- 
-This repository provides reproductions for a couple issues I have encountered using Signalium in a Vite-React-TypeScript-MUI app.
-
-This app can be run in 3 different modes:
-
-- Everything Works - workaround employed to show how the intended correct functioning of the app
-- Sort Menu Bug - the sort menu does not open
-- Dashboard Bug - the sort menu does open and functions as intended, but the items in the dashboard don't sort
-
-The mode is set in app-state.ts.
+Edit: This branch illustrates that the same sort menu bug does not occur when Signalium is replaced with Jotai.
