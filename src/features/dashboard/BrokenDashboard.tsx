@@ -4,17 +4,14 @@ import { unitStates } from "./dashboard-state";
 import Toolbar from "./toolbar/Toolbar";
 import UnitPanel from "./unit-summary/UnitPanel";
 
-function Dashboard() {
+function BrokenDashboard() {
+    const items = unitStates().map(x => <UnitPanel key={x.code} state={x} />);
     return (
         <Stack spacing={2} sx={{ maxWidth: "100%" }}>
             <Toolbar />
-            {getItems()}
+            {items}
         </Stack>
     );
-
-    function getItems() {
-        return unitStates().map(x => <UnitPanel key={x.code} state={x} />);
-    }
 }
 
-export default component(Dashboard);
+export default component(BrokenDashboard);
