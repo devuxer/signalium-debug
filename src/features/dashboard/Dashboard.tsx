@@ -4,11 +4,9 @@ import { mode } from "@/app-state";
 import { unitStates } from "./dashboard-state";
 import BrokenToolbar from "./toolbar/BrokenToolbar";
 import Toolbar from "./toolbar/Toolbar";
-import { sortDirection } from "./toolbar/toolbar-state";
 import UnitPanel from "./unit-summary/UnitPanel";
 
 function Dashboard() {
-    console.log(sortDirection.value); // this is needed even though the unitStates reactive function depends on sortDirection.value
     const items = unitStates().map(x => <UnitPanel key={x.code} state={x} />);
     return (
         <Stack spacing={2} sx={{ maxWidth: "100%" }}>
@@ -19,12 +17,10 @@ function Dashboard() {
 
     function getToolbar() {
         switch (mode) {
-            case "Everything Works":
+            case "Working":
                 return <Toolbar />;
-            case "Sort Menu Bug":
+            case "Broken":
                 return <BrokenToolbar />;
-            case "Dashboard Bug":
-                return <Toolbar />;
         }
     }
 }

@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { mode } from "./app-state";
-import BrokenDashboard from "./features/dashboard/BrokenDashboard";
 import Dashboard from "./features/dashboard/Dashboard";
 
 const theme = createTheme({
@@ -42,12 +41,10 @@ export default function App() {
 
     function getDashboard() {
         switch (mode) {
-            case "Everything Works":
+            case "Working":
                 return <Dashboard />;
-            case "Sort Menu Bug":
+            case "Broken":
                 return <Dashboard />;
-            case "Dashboard Bug":
-                return <BrokenDashboard />;
         }
     }
 }

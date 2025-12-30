@@ -12,7 +12,7 @@ const rawUnitStates = [
 ];
 
 export const unitStates = reactive(() =>
-    rawUnitStates.sort(
+    rawUnitStates.toSorted(
         sortDirection.value === "Ascending" ? compareStrings(x => x.name) : compareStringsReverse(x => x.name),
     ),
 );

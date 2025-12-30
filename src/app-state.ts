@@ -1,5 +1,4 @@
-type Mode = "Everything Works" | "Sort Menu Bug" | "Dashboard Bug";
+type Mode = "Working" | "Broken";
 
-export const mode: Mode = "Everything Works";
-// const mode: Mode = "Sort Menu Bug";
-// const mode: Mode = "Dashboard Bug";
+// export const mode: Mode = "Working";
+export const mode: Mode = "Broken";
