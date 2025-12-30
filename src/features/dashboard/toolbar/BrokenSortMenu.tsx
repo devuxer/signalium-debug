@@ -19,20 +19,20 @@ function BrokenSortMenu() {
             {getMenuItem("Unit Name Z-A", "Descending")}
         </Menu>
     );
+}
 
-    function getMenuItem(label: string, direction: SortDirection) {
-        const isActive = direction === sortDirection.value;
-        return (
-            <MenuItem onClick={activate}>
-                {isActive && <ListItemIcon>{<CheckIcon />}</ListItemIcon>}
-                <ListItemText inset={!isActive}>{label}</ListItemText>
-            </MenuItem>
-        );
+function getMenuItem(label: string, direction: SortDirection) {
+    const isActive = direction === sortDirection.value;
+    return (
+        <MenuItem onClick={activate}>
+            {isActive && <ListItemIcon>{<CheckIcon />}</ListItemIcon>}
+            <ListItemText inset={!isActive}>{label}</ListItemText>
+        </MenuItem>
+    );
 
-        function activate() {
-            sortDirection.value = direction;
-            state.close();
-        }
+    function activate() {
+        sortDirection.value = direction;
+        state.close();
     }
 }
 

@@ -3,11 +3,10 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import ToolbarCore from "@mui/material/Toolbar";
 import { component } from "signalium/react";
-import { useMenuState } from "@/common/signal-helpers";
 import BrokenSortMenu from "./BrokenSortMenu";
+import { brokenSortMenuState } from "./toolbar-state";
 
 function Toolbar() {
-    const sortMenuState = useMenuState();
     return (
         <>
             <ToolbarCore sx={{ justifyContent: "space-between" }}>
@@ -17,7 +16,7 @@ function Toolbar() {
                         startIcon={<SortIcon />}
                         color="secondary"
                         onClick={e => {
-                            sortMenuState.open(e.currentTarget);
+                            brokenSortMenuState.open(e.currentTarget);
                         }}
                     >
                         Sort (broken)
