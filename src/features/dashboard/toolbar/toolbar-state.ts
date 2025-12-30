@@ -1,8 +1,8 @@
-import { signal } from "signalium";
+import { atom } from "jotai";
 import { createMenuState } from "@/common/signal-helpers";
 
 export type SortDirection = "Ascending" | "Descending";
 
-export const sortDirection = signal<SortDirection>("Ascending");
+export const sortDirectionAtom = atom<SortDirection>("Ascending");
 
-export const brokenSortMenuState = createMenuState();
+export const sortMenuState = createMenuState();

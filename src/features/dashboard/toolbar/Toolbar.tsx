@@ -2,12 +2,12 @@ import SortIcon from "@mui/icons-material/FilterList";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import ToolbarCore from "@mui/material/Toolbar";
-import { component } from "signalium/react";
-import { useMenuState } from "@/common/signal-helpers";
+import { useSetAtom } from "jotai";
 import SortMenu from "./SortMenu";
+import { sortMenuState } from "./toolbar-state";
 
-function Toolbar() {
-    const sortMenuState = useMenuState();
+export default function Toolbar() {
+    const openSortMenu = useSetAtom(sortMenuState.openAtom);
     return (
         <>
             <ToolbarCore sx={{ justifyContent: "space-between" }}>
@@ -17,20 +17,14 @@ function Toolbar() {
                         startIcon={<SortIcon />}
                         color="secondary"
                         onClick={e => {
-                            sortMenuState.open(e.currentTarget);
+                            openSortMenu(e.currentTarget);
                         }}
                     >
                         Sort (working)
                     </Button>
                 </Stack>
             </ToolbarCore>
-            <SortMenu
-                canShow={sortMenuState.canShow()}
-                anchorEl={sortMenuState.anchorEl()}
-                onClose={sortMenuState.close}
-            />
+            <SortMenu />
         </>
     );
 }
-
-export default component(Toolbar);

@@ -1,8 +1,6 @@
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { mode } from "./app-state";
-import BrokenDashboard from "./features/dashboard/BrokenDashboard";
 import Dashboard from "./features/dashboard/Dashboard";
 
 const theme = createTheme({
@@ -36,18 +34,9 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Box sx={{ p: 2 }}>{getDashboard()}</Box>
+            <Box sx={{ p: 2 }}>
+                <Dashboard />
+            </Box>
         </ThemeProvider>
     );
-
-    function getDashboard() {
-        switch (mode) {
-            case "Everything Works":
-                return <Dashboard />;
-            case "Sort Menu Bug":
-                return <Dashboard />;
-            case "Dashboard Bug":
-                return <BrokenDashboard />;
-        }
-    }
 }

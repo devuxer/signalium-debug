@@ -1,6 +1,6 @@
-import { reactive } from "signalium";
+import { atom } from "jotai";
 import { compareStrings, compareStringsReverse } from "@/common/comparers";
-import { sortDirection } from "./toolbar/toolbar-state";
+import { sortDirectionAtom } from "./toolbar/toolbar-state";
 import { createUnitState } from "./unit-summary/unit-state";
 
 const rawUnitStates = [
@@ -11,8 +11,8 @@ const rawUnitStates = [
     createUnitState("Baz", "STA", "Sierra Tango Alpha"),
 ];
 
-export const unitStates = reactive(() =>
-    rawUnitStates.sort(
-        sortDirection.value === "Ascending" ? compareStrings(x => x.name) : compareStringsReverse(x => x.name),
+export const unitStatesAtom = atom(get =>
+    rawUnitStates.toSorted(
+        get(sortDirectionAtom) === "Ascending" ? compareStrings(x => x.name) : compareStringsReverse(x => x.name),
     ),
 );

@@ -3,23 +3,21 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { component } from "signalium/react";
-import { type SortDirection, sortDirection } from "./toolbar-state";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { type SortDirection, sortDirectionAtom, sortMenuState as state } from "./toolbar-state";
 
-interface Props {
-    canShow: boolean;
-    anchorEl: HTMLElement | null;
-    onClose: () => void;
-}
-
-function SortMenu({ canShow, anchorEl, onClose }: Props) {
+export default function SortMenu() {
+    const [sortDirection, setSortDirection] = useAtom(sortDirectionAtom);
+    const canShow = useAtomValue(state.canShowAtom);
+    const anchorEl = useAtomValue(state.anchorElAtom);
+    const close = useSetAtom(state.closeAtom);
     return (
         <Menu
             open={canShow}
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "left" }}
-            onClose={onClose}
+            onClose={close}
         >
             {getMenuItem("Unit Name A-Z", "Ascending")}
             {getMenuItem("Unit Name Z-A", "Descending")}
@@ -27,7 +25,7 @@ function SortMenu({ canShow, anchorEl, onClose }: Props) {
     );
 
     function getMenuItem(label: string, direction: SortDirection) {
-        const isActive = direction === sortDirection.value;
+        const isActive = direction === sortDirection;
         return (
             <MenuItem onClick={activate}>
                 {isActive && <ListItemIcon>{<CheckIcon />}</ListItemIcon>}
@@ -36,10 +34,8 @@ function SortMenu({ canShow, anchorEl, onClose }: Props) {
         );
 
         function activate() {
-            sortDirection.value = direction;
-            onClose();
+            setSortDirection(direction);
+            close();
         }
     }
 }
-
-export default component(SortMenu);

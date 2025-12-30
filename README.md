@@ -1,5 +1,7 @@
 # Signalium Debug
 
+Edit: This branch illustrates that the same bugs do not when Signalium is replaced with Jotai.
+ 
 This repository provides reproductions for a couple issues I have encountered using Signalium in a Vite-React-TypeScript-MUI app.
 
 This app can be run in 3 different modes:

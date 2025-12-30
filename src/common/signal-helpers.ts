@@ -1,34 +1,17 @@
-import { reactive, signal } from "signalium";
-import { useSignal } from "signalium/react";
-
-export function useMenuState() {
-    const rawAnchorEl = useSignal<HTMLElement | null>(null);
-    const anchorEl = reactive(() => rawAnchorEl.value);
-    const canShow = reactive(() => !!anchorEl());
-
-    function open(element: HTMLElement) {
-        rawAnchorEl.value = element;
-    }
-
-    function close() {
-        rawAnchorEl.value = null;
-    }
-
-    return { anchorEl, canShow, open, close };
-}
+import { atom } from "jotai";
 
 export function createMenuState() {
-    const rawAnchorEl = signal<HTMLElement | null>(null);
-    const anchorEl = reactive(() => rawAnchorEl.value);
-    const canShow = reactive(() => !!anchorEl());
+    const rawAnchorElAtom = atom<HTMLElement | null>(null);
+    const anchorElAtom = atom(get => get(rawAnchorElAtom));
+    const canShowAtom = atom(get => !!get(anchorElAtom));
 
-    return { anchorEl, canShow, open, close };
+    const openAtom = atom(null, (_get, set, anchorEl: HTMLElement) => {
+        set(rawAnchorElAtom, anchorEl);
+    });
 
-    function open(value: HTMLElement) {
-        rawAnchorEl.value = value;
-    }
+    const closeAtom = atom(null, (_get, set) => {
+        set(rawAnchorElAtom, null);
+    });
 
-    function close() {
-        rawAnchorEl.value = null;
-    }
+    return { anchorElAtom: anchorElAtom, canShowAtom: canShowAtom, openAtom, closeAtom };
 }
